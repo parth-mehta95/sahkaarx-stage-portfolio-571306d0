@@ -16,11 +16,18 @@ __all__ = [
     "TargetValidationError",
     "DatasetMismatchError",
     "validate_iris_features",
+    "validate_feature_matrix",
     "validate_target_labels",
+    "validate_target_vector",
     "validate_dataset_pair",
     "validate_train_test_split",
     "validate_prediction_probabilities",
 ]
+
+# Convenience Aliases
+validate_feature_matrix = validate_iris_features
+validate_target_vector = validate_target_labels
+validate_iris_dataframe = validate_iris_features
 
 # Canonical Iris Dataset Constants
 EXPECTED_IRIS_FEATURE_COUNT: int = 4

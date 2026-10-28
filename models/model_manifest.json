@@ -1,0 +1,100 @@
+{
+  "project": "SahkaarX Stage Portfolio Capstone - Iris ML Pipeline",
+  "version": "1.0.0",
+  "dataset": {
+    "name": "Iris Flower Dataset",
+    "samples": 150,
+    "features": [
+      "sepal length (cm)",
+      "sepal width (cm)",
+      "petal length (cm)",
+      "petal width (cm)"
+    ],
+    "target_classes": [
+      "setosa",
+      "versicolor",
+      "virginica"
+    ],
+    "train_split": 0.8,
+    "test_split": 0.2,
+    "stratified": true,
+    "random_state": 42
+  },
+  "preprocessing": {
+    "scaler": "StandardScaler",
+    "leak_free": true,
+    "fitted_on": "training_set_only"
+  },
+  "models": {
+    "decision_tree": {
+      "model_name": "Decision Tree Classifier",
+      "architecture": "sklearn.tree.DecisionTreeClassifier",
+      "paradigm": "Supervised (Interpretable)",
+      "hyperparameters": {
+        "criterion": "gini",
+        "max_depth": 3,
+        "random_state": 42
+      },
+      "performance": {
+        "accuracy": 0.9667,
+        "precision_macro": 0.9697,
+        "recall_macro": 0.9667,
+        "f1_macro": 0.9666,
+        "precision_weighted": 0.9697,
+        "recall_weighted": 0.9667,
+        "f1_weighted": 0.9666,
+        "train_latency_ms": 2.145,
+        "inference_latency_ms": 0.282
+      },
+      "artifact_file": "decision_tree.joblib"
+    },
+    "random_forest": {
+      "model_name": "Random Forest Classifier",
+      "architecture": "sklearn.ensemble.RandomForestClassifier",
+      "paradigm": "Supervised (Ensemble Bagging)",
+      "hyperparameters": {
+        "n_estimators": 100,
+        "max_depth": 3,
+        "random_state": 42
+      },
+      "performance": {
+        "accuracy": 1.0000,
+        "precision_macro": 1.0000,
+        "recall_macro": 1.0000,
+        "f1_macro": 1.0000,
+        "precision_weighted": 1.0000,
+        "recall_weighted": 1.0000,
+        "f1_weighted": 1.0000,
+        "train_latency_ms": 74.832,
+        "inference_latency_ms": 2.415
+      },
+      "artifact_file": "random_forest.joblib"
+    },
+    "kmeans": {
+      "model_name": "K-Means Clustering",
+      "architecture": "sklearn.cluster.KMeans",
+      "paradigm": "Unsupervised (Bipartite Aligned)",
+      "alignment_method": "Kuhn-Munkres Hungarian Bipartite Matching",
+      "hyperparameters": {
+        "n_clusters": 3,
+        "n_init": 10,
+        "max_iter": 300,
+        "random_state": 42
+      },
+      "performance": {
+        "accuracy": 0.8667,
+        "precision_macro": 0.8788,
+        "recall_macro": 0.8667,
+        "f1_macro": 0.8658,
+        "precision_weighted": 0.8788,
+        "recall_weighted": 0.8667,
+        "f1_weighted": 0.8658,
+        "adjusted_rand_index": 0.7163,
+        "silhouette_score": 0.4599,
+        "train_latency_ms": 18.420,
+        "inference_latency_ms": 0.345
+      },
+      "artifact_file": "kmeans.joblib"
+    }
+  }
+}

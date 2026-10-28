@@ -55,8 +55,11 @@ data/raw/*.csv
 data/processed/*.csv
 !data/.gitkeep
 models/*.pkl
-models/*.joblib
 !models/.gitkeep
+!models/*.json
+!models/*.md
+!models/*.py
+!models/*.joblib
 notebooks/.ipynb_checkpoints/
 !notebooks/.gitkeep
 
