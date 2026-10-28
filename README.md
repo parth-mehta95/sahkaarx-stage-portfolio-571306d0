@@ -79,6 +79,7 @@ sahkaarx-stage-portfolio-571306d0/
 ├── README.md                # Capstone pipeline documentation & phase specifications
 ├── data_loader.py           # Root type-hinted Iris data loader and preprocessing module
 ├── validation_functions.py  # Root type-hinted Iris validation module
+├── sql_queries.py           # Root type-hinted Iris relational SQL query functions module
 └── practice/
     ├── week-01-practice-initialize-capstone-repository-with-git/
     │   ├── .gitignore
@@ -91,12 +92,18 @@ sahkaarx-stage-portfolio-571306d0/
     ├── week-01-project-capstone-scaffold-python-module-and-git/
     │   ├── README.md
     │   └── data_loader.py
-    └── week-02-practice-feature-branch-with-type-hinted-validat/
-        ├── README.md                      # Feature branch, PR & conflict resolution report
-        ├── validation_functions.py        # Type-hinted validators (features, labels, pairs)
-        ├── test_validation_functions.py   # Complete pytest test suite
-        ├── simulate_branch_and_conflict.ps1 # One-click PowerShell Git conflict simulator
-        └── simulate_branch_and_conflict.sh  # Cross-platform Bash Git conflict simulator
+    ├── week-02-practice-feature-branch-with-type-hinted-validat/
+    │   ├── README.md                      # Feature branch, PR & conflict resolution report
+    │   ├── validation_functions.py        # Type-hinted validators (features, labels, pairs)
+    │   ├── test_validation_functions.py   # Complete pytest test suite
+    │   ├── simulate_branch_and_conflict.ps1 # One-click PowerShell Git conflict simulator
+    │   └── simulate_branch_and_conflict.sh  # Cross-platform Bash Git conflict simulator
+    └── week-03-practice-intermediate-pull-request-with-code-rev/
+        ├── README.md                      # PR review report, SQL schema, and query specs
+        ├── sql_queries.py                 # Parameterized SELECT, JOIN, and aggregation queries
+        ├── test_sql_queries.py            # Comprehensive unit test suite
+        ├── simulate_pr_and_review.ps1     # One-click PowerShell PR and review simulator
+        └── simulate_pr_and_review.sh      # Cross-platform Bash PR and review simulator
 ```
 
 ---
@@ -174,6 +181,25 @@ X_scaled = preprocess(X)
 # 3. Perform stratified train/test split and scaling without leakage
 X_train, X_test, y_train, y_test = preprocess(X, y, test_size=0.2, random_state=42)
 print(f"Train samples: {len(X_train)}, Test samples: {len(X_test)}")
+```
+
+---
+
+## 🗄️ Relational SQL Query Module (`sql_queries.py`)
+
+The root module [`sql_queries.py`](file:///d:/challengers%20testing/28-oct-2026/sahkaarx-stage-portfolio-571306d0/sql_queries.py) implements the relational SQLite layer developed in PR #3 (`sql_queries` branch):
+
+- **Parameterized SELECT:** `select_iris_measurements()` filters by species, continuous thresholds, and pagination limits using parameterized `?` placeholders.
+- **Relational INNER JOIN:** `join_measurements_with_species()` joins observation records with taxonomy metadata and computed botanical features (`petal_area_cm2`).
+- **Analytical Aggregation:** `select_species_summary_statistics()` calculates per-species descriptive summary statistics.
+- **Transaction Safety:** `managed_database_connection()` context manager ensures automatic commit, rollback, and connection cleanup.
+
+```bash
+# Run SQL queries demonstration
+python sql_queries.py
+
+# Run SQL query test suite
+pytest practice/week-03-practice-intermediate-pull-request-with-code-rev/test_sql_queries.py -v
 ```
 
 ---
