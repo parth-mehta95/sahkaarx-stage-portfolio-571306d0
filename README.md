@@ -47,19 +47,21 @@ flowchart LR
   - Leak-free transformation pipeline: the scaler fits solely on the training partition and transforms the test partition.
   - Format preservation: retaining pandas DataFrame metadata (column headers and indices) or NumPy ndarrays based on input types.
 
-### Phase 4: Model Exploration & Training (`train.py`)
-- **Objective:** Train and serialize baseline and ensemble classification models.
+### Phase 4: Model Exploration & Training (`models.py`)
+- **Objective:** Train and serialize candidate supervised and unsupervised model architectures.
 - **Components:**
-  - Baseline model: Multiclass `LogisticRegression` using `lbfgs` solver.
-  - Ensemble model: `RandomForestClassifier` with hyperparameter configuration (`n_estimators`, `max_depth`).
-  - Serialization of fitted estimators using `joblib` into the `models/` registry for reproducible inference.
+  - Interpretable classifier: `DecisionTreeClassifier` with `max_depth=3` and Gini impurity splits.
+  - Ensemble classifier: `RandomForestClassifier` with $N=100$ trees and feature subspace randomization.
+  - Unsupervised clustering: `KMeans` with $K=3$ and inertia minimization.
+  - Model serialization: Persisting fitted estimators with `joblib` into `models/*.joblib`.
 
-### Phase 5: Model Evaluation & Benchmarking (`evaluate.py`)
-- **Objective:** Quantify model performance across multiple classification criteria.
+### Phase 5: Model Evaluation & Benchmarking (`iris_model_comparison.ipynb`, `metrics.csv`)
+- **Objective:** Quantify model performance across supervised and unsupervised paradigms.
 - **Components:**
-  - Comprehensive performance metrics: Accuracy, Precision, Recall, and Macro-F1 score.
-  - Confusion matrix generation and scikit-learn classification reporting.
-  - Comparative benchmark evaluation between baseline and ensemble architectures.
+  - Kuhn-Munkres Hungarian bipartite algorithm for optimal cluster-to-label alignment.
+  - Comprehensive metrics: Accuracy, Precision (Macro/Weighted), Recall (Macro/Weighted), F1-Score (Macro/Weighted), and Latency.
+  - Unsupervised validation: Silhouette Score, Adjusted Rand Index (ARI), and V-Measure.
+  - Exportable benchmarking table saved to `metrics.csv`.
 
 ### Phase 6: Automated Testing & Continuous Verification (`tests/`)
 - **Objective:** Ensure pipeline stability, type safety, and reproducibility.
@@ -81,6 +83,9 @@ sahkaarx-stage-portfolio-571306d0/
 ├── validation_functions.py  # Root type-hinted Iris validation module
 ├── sql_queries.py           # Root type-hinted Iris relational SQL query functions module
 ├── sql_features.py          # Root type-hinted Iris SQL aggregation & feature engineering module
+├── models.py                # Root type-hinted Decision Tree, Random Forest & K-Means module
+├── metrics.csv              # Root model performance benchmark comparison CSV
+├── iris_model_comparison.ipynb # Root interactive Jupyter Notebook
 └── practice/
     ├── week-01-practice-initialize-capstone-repository-with-git/
     │   ├── .gitignore
@@ -105,12 +110,20 @@ sahkaarx-stage-portfolio-571306d0/
     │   ├── test_sql_queries.py            # Comprehensive unit test suite
     │   ├── simulate_pr_and_review.ps1     # One-click PowerShell PR and review simulator
     │   └── simulate_pr_and_review.sh      # Cross-platform Bash PR and review simulator
-    └── week-04-practice-sql-feature-engineering-with-pull-reque/
-        ├── README.md                      # Feature engineering report, PR #4 review & merge logs
-        ├── sql_features.py                # GROUP BY and JOIN queries for Iris feature engineering
-        ├── test_sql_features.py           # Comprehensive unit test suite
-        ├── simulate_sql_features_pr.ps1   # One-click PowerShell PR and merge simulator
-        └── simulate_sql_features_pr.sh    # Cross-platform Bash PR and merge simulator
+    ├── week-04-practice-sql-feature-engineering-with-pull-reque/
+    │   ├── README.md                      # Feature engineering report, PR #4 review & merge logs
+    │   ├── sql_features.py                # GROUP BY and JOIN queries for Iris feature engineering
+    │   ├── test_sql_features.py           # Comprehensive unit test suite
+    │   ├── simulate_sql_features_pr.ps1   # One-click PowerShell PR and merge simulator
+    │   └── simulate_sql_features_pr.sh    # Cross-platform Bash PR and merge simulator
+    └── week-05-practice-train-and-compare-ml-models/
+        ├── README.md                      # Comprehensive ML benchmark report, PR #5 review & merge logs
+        ├── models.py                      # Decision Tree, Random Forest & K-Means training & Hungarian alignment
+        ├── test_models.py                 # 100% passing pytest unit test suite
+        ├── iris_model_comparison.ipynb    # Interactive Jupyter Notebook demonstration
+        ├── metrics.csv                    # Tabular benchmark performance comparison table
+        ├── simulate_ml_models_pr.ps1      # One-click PowerShell PR and merge simulator
+        └── simulate_ml_models_pr.sh       # Cross-platform Bash PR and merge simulator
 ```
 
 ---
