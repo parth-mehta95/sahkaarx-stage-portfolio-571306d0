@@ -78,28 +78,25 @@ sahkaarx-stage-portfolio-571306d0/
 ├── requirements.txt         # Core dependencies (numpy, pandas, scikit-learn, joblib, pytest)
 ├── README.md                # Capstone pipeline documentation & phase specifications
 ├── data_loader.py           # Root type-hinted Iris data loader and preprocessing module
+├── validation_functions.py  # Root type-hinted Iris validation module
 └── practice/
     ├── week-01-practice-initialize-capstone-repository-with-git/
     │   ├── .gitignore
     │   ├── requirements.txt
     │   ├── README.md
     │   └── iris-ml-pipeline/
-    │       ├── setup_git_repo.ps1
-    │       ├── setup_git_repo.sh
-    │       ├── data/
-    │       ├── models/
-    │       ├── notebooks/
-    │       ├── src/
-    │       │   ├── data_loader.py
-    │       │   ├── evaluate.py
-    │       │   └── train.py
-    │       └── tests/
     ├── week-01-practice-type-hinted-data-loading-module/
     │   ├── README.md
     │   └── data_loader.py
-    └── week-01-project-capstone-scaffold-python-module-and-git/
-        ├── README.md        # Milestone project brief, deliverables & phase breakdown
-        └── data_loader.py   # Type-hinted module mirror for practice evaluation
+    ├── week-01-project-capstone-scaffold-python-module-and-git/
+    │   ├── README.md
+    │   └── data_loader.py
+    └── week-02-practice-feature-branch-with-type-hinted-validat/
+        ├── README.md                      # Feature branch, PR & conflict resolution report
+        ├── validation_functions.py        # Type-hinted validators (features, labels, pairs)
+        ├── test_validation_functions.py   # Complete pytest test suite
+        ├── simulate_branch_and_conflict.ps1 # One-click PowerShell Git conflict simulator
+        └── simulate_branch_and_conflict.sh  # Cross-platform Bash Git conflict simulator
 ```
 
 ---
