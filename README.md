@@ -80,6 +80,7 @@ sahkaarx-stage-portfolio-571306d0/
 ├── data_loader.py           # Root type-hinted Iris data loader and preprocessing module
 ├── validation_functions.py  # Root type-hinted Iris validation module
 ├── sql_queries.py           # Root type-hinted Iris relational SQL query functions module
+├── sql_features.py          # Root type-hinted Iris SQL aggregation & feature engineering module
 └── practice/
     ├── week-01-practice-initialize-capstone-repository-with-git/
     │   ├── .gitignore
@@ -98,12 +99,18 @@ sahkaarx-stage-portfolio-571306d0/
     │   ├── test_validation_functions.py   # Complete pytest test suite
     │   ├── simulate_branch_and_conflict.ps1 # One-click PowerShell Git conflict simulator
     │   └── simulate_branch_and_conflict.sh  # Cross-platform Bash Git conflict simulator
-    └── week-03-practice-intermediate-pull-request-with-code-rev/
-        ├── README.md                      # PR review report, SQL schema, and query specs
-        ├── sql_queries.py                 # Parameterized SELECT, JOIN, and aggregation queries
-        ├── test_sql_queries.py            # Comprehensive unit test suite
-        ├── simulate_pr_and_review.ps1     # One-click PowerShell PR and review simulator
-        └── simulate_pr_and_review.sh      # Cross-platform Bash PR and review simulator
+    ├── week-03-practice-intermediate-pull-request-with-code-rev/
+    │   ├── README.md                      # PR review report, SQL schema, and query specs
+    │   ├── sql_queries.py                 # Parameterized SELECT, JOIN, and aggregation queries
+    │   ├── test_sql_queries.py            # Comprehensive unit test suite
+    │   ├── simulate_pr_and_review.ps1     # One-click PowerShell PR and review simulator
+    │   └── simulate_pr_and_review.sh      # Cross-platform Bash PR and review simulator
+    └── week-04-practice-sql-feature-engineering-with-pull-reque/
+        ├── README.md                      # Feature engineering report, PR #4 review & merge logs
+        ├── sql_features.py                # GROUP BY and JOIN queries for Iris feature engineering
+        ├── test_sql_features.py           # Comprehensive unit test suite
+        ├── simulate_sql_features_pr.ps1   # One-click PowerShell PR and merge simulator
+        └── simulate_sql_features_pr.sh    # Cross-platform Bash PR and merge simulator
 ```
 
 ---
@@ -200,6 +207,26 @@ python sql_queries.py
 
 # Run SQL query test suite
 pytest practice/week-03-practice-intermediate-pull-request-with-code-rev/test_sql_queries.py -v
+```
+
+---
+
+## 📊 SQL Feature Engineering Module (`sql_features.py`)
+
+The root module [`sql_features.py`](file:///d:/challengers%20testing/28-oct-2026/sahkaarx-stage-portfolio-571306d0/sql_features.py) implements the relational feature engineering layer developed in PR #4 (`sql-features` branch):
+
+- **Taxonomic GROUP BY Aggregations:** `aggregate_species_features()` computes observation frequencies, dimensional means, ranges, surface areas, aspect ratios, and applies `HAVING` threshold filtering.
+- **Observation Feature Vectors with JOINs & CTE:** `engineer_observation_features()` combines observation records with botanical taxonomy and an aggregate benchmark CTE to compute geometric ratios, surface areas, and relative sample deltas from species averages.
+- **Discretized Size Tier Aggregations:** `aggregate_features_by_size_tier()` bins measurements using SQL `CASE` expressions and aggregates morphological distributions across species.
+- **Class Separability Analysis:** `compute_feature_separability_summary()` quantifies between-class discriminative power directly in SQL.
+- **ML Matrix Extractor:** `get_feature_matrix_and_target()` provides clean, ready-to-train feature matrices `X` and target vectors `y` for scikit-learn models.
+
+```bash
+# Run SQL feature engineering demonstration
+python sql_features.py
+
+# Run SQL feature engineering unit tests
+pytest practice/week-04-practice-sql-feature-engineering-with-pull-reque/test_sql_features.py -v
 ```
 
 ---
